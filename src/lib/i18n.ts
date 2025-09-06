@@ -8,7 +8,7 @@ type Locale = keyof typeof translations;
 /**
  * Base translator: looks up a key in the given locale.
  */
-export function t2(locale: Locale, key: string): string {
+export function t(locale: Locale, key: string): string {
   const parts = key.split('.');
   return parts.reduce<unknown>((obj, part) => {
     if (typeof obj === 'object' && obj !== null && part in obj) {
@@ -23,5 +23,5 @@ export function t2(locale: Locale, key: string): string {
  * Example: const t = useTranslator('en'); t('greeting');
  */
 export function useTranslator(locale: Locale) {
-  return (key: string) => t2(locale, key);
+  return (key: string) => t(locale, key);
 }
