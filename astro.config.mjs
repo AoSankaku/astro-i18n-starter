@@ -3,6 +3,8 @@ import sitemap from '@astrojs/sitemap';
 import { defineConfig } from 'astro/config';
 import { DEFAULT_LOCALE_SETTING, LOCALES_SETTING } from './src/locales';
 
+import react from '@astrojs/react';
+
 // https://astro.build/config
 export default defineConfig({
   site: 'https://astro-i18n-starter.pages.dev', // Set your site's URL
@@ -14,17 +16,14 @@ export default defineConfig({
       redirectToDefaultLocale: false,
     },
   },
-  integrations: [
-    mdx(),
-    sitemap({
-      i18n: {
-        defaultLocale: DEFAULT_LOCALE_SETTING,
-        locales: Object.fromEntries(
-          Object.entries(LOCALES_SETTING).map(
-            ([key, value]) => [key, value.lang ?? key]
-          )
-        ),
-      },
-    })
-  ],
+  integrations: [mdx(), sitemap({
+    i18n: {
+      defaultLocale: DEFAULT_LOCALE_SETTING,
+      locales: Object.fromEntries(
+        Object.entries(LOCALES_SETTING).map(
+          ([key, value]) => [key, value.lang ?? key]
+        )
+      ),
+    },
+  }), react()],
 });
