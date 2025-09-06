@@ -9,6 +9,7 @@ import heroImageEn from "@/assets/en/hero.svg";
 import heroImageJa from "@/assets/ja/hero.svg";
 import heroImageZhCn from "@/assets/zh-cn/hero.svg";
 import { Image } from "astro:assets";
+import { useTranslator } from "@/lib/i18n";
 
 const locale = Astro.currentLocale as Lang;
 
@@ -16,6 +17,8 @@ export const getStaticPaths = () =>
   Object.keys(LOCALES).map((lang) => ({
     params: { lang },
   }));
+
+const t2 = useTranslator(Astro.currentLocale as "en" | "ja");
 ---
 
 <Layout>
@@ -37,7 +40,7 @@ export const getStaticPaths = () =>
   />
 
   <p>
-    {t("test.test")}
+    {t2("meta.title")}
     <em>
       {
         t({
