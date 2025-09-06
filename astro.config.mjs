@@ -8,7 +8,7 @@ import react from '@astrojs/react';
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://astro-i18n-starter.pages.dev', // Set your site's URL
+  site: 'http://localhost:4321', // Set your site's URL
   i18n: {
     defaultLocale: DEFAULT_LOCALE_SETTING,
     locales: Object.keys(LOCALES_SETTING),

@@ -20,12 +20,4 @@ export const LOCALES_SETTING: LocaleSetting = {
 	ja: {
 		label: "日本語",
 	},
-	"zh-cn": {
-		label: "简体中文",
-		lang: "zh-CN",
-	},
-	ar: {
-		label: "العربية",
-		dir: "rtl",
-	},
 };

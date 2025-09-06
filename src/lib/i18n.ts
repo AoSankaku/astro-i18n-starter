@@ -1,7 +1,18 @@
-import en from '../locales/en.yml';
-import ja from '../locales/ja.yml';
+import { LOCALES_SETTING, DEFAULT_LOCALE_SETTING } from '../locales';
 
-const translations = { en, ja };
+// Dynamically import YAML files for each locale in LOCALES_SETTING
+// Assumes you have files like: src/locales/en.yml, src/locales/ja.yml, etc.
+const translations: Record<string, any> = {};
+
+for (const locale of Object.keys(LOCALES_SETTING)) {
+  try {
+    // Vite will bundle only matching files
+    translations[locale] = (await import(`../locales/${locale}.yml`)).default;
+  } catch (err) {
+    console.warn(`[i18n] Missing translation file for locale "${locale}"`);
+    translations[locale] = {};
+  }
+}
 
 type Locale = keyof typeof translations;
 
@@ -25,3 +36,8 @@ export function t(locale: Locale, key: string): string {
 export function useTranslator(locale: Locale) {
   return (key: string) => t(locale, key);
 }
+
+/**
+ * Get the default translator based on DEFAULT_LOCALE_SETTING
+ */
+export const tDefault = useTranslator(DEFAULT_LOCALE_SETTING as Locale);
