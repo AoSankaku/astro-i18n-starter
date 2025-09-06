@@ -1,38 +1,51 @@
-# Astro i18n Starter
+# Astro i18n Starter with YAML Supported translation
 
-```sh
-npm create astro@latest -- --template psephopaiktes/astro-i18n-starter
+This template can handle translations using YAML file, without using this very long hard-to-work-on redundant unmaintainable unreadable language objects.
+
+
+Before: 
+
+```tsx
+import { useTranslator } from "@/lib/i18n";
+const t = useTranslations(Astro.currentLocale as Lang);
+const locale = Astro.currentLocale as Lang;
+
+// You have to write this entire object directly in your code, how confusing 😫
+{t({
+  ja: "こんにちは",
+  en: "Hello",
+  "zh-cn": "你好",
+  ar: "مرحبًا",
+})}
 ```
 
-[![Logo Image](docs/hero.svg)](https://astro-i18n-starter.pages.dev/ "See document")
+After:
 
-i18n Starter is a simple [Astro](https://astro.build) theme for creating multilingual websites.
+`src/locales/en.yaml`
 
-It supports [i18n routing in Astro v4.0](https://docs.astro.build/en/guides/internationalization/).
+```yaml
+greetings:
+  hello: Hello
+  goodnight: "Good Night!"
+```
 
-It only supports the subdirectory URL format. Each language is managed with a URL like the following. The root URL will redirect to the specified default language.
+`src/locales/ja.yaml`
 
-- example.com/en/
-- example.com/ja/
+```yaml
+greetings:
+  hello: こんにちは
+  goodnight: "お゛や゛す゛み゛な゛さ゛い゛！゛！゛！゛！゛！゛（大声）"
+```
 
+`src/pages/[lang]/yours.astro`
 
-## Features
+```tsx
+import { useTranslator } from "@/lib/i18n";
+const t = useTranslator(Astro.currentLocale as "en" | "ja");
 
-- [x] Support for Astro's official i18n functionality
-- [x] Various methods for managing multilingual pages
-- [x] Vanilla CSS
-- [x] SEO-friendly
+// Just specify the key you defined, you are absolutely free to work on!😁
+{t("greetings.hello")}
+{t("greetings.goodnight")}
+```
 
-
-## Lighthouse Score
-
-[![All scores are 100.](docs/lighthouse.png)](https://pagespeed.web.dev/analysis/https-astro-i18n-starter-pages-dev-en/8sg3q21r6c?form_factor=desktop "Check score")
-
-
-## Documentation
-
-This theme is self-documented, and the pages within this theme can be considered as documentation.
-
-Install and preview locally or check out the sample site below.
-
-https://astro-i18n-starter.pages.dev/
+Enjoy.
