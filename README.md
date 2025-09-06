@@ -2,18 +2,6 @@
 
 This template can handle translations using YAML file, without using this very long hard-to-work-on redundant unmaintainable unreadable language objects.
 
-> [!CAUTION]
-> You can `yarn start` and test this project, but can't `yarn build` just because I haven't removed `zh-cn` and `ar` transtations.
->
-> Apparently, removing zh-cn and ar will allow you to build the entire project.
->
-> ```
-> 23:38:04 ▶ src/pages/[lang]/index.astro
-> 23:38:04   ├─ /en/index.html (+2ms)
-> 23:38:04   ├─ /ja/index.html (+1ms)
-> ```
-
-
 Before: 
 
 ```tsx
